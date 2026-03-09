@@ -3,39 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aura AI ✨ - Multilingual Assistant</title>
+    <title>Aura AI ✨</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-
     <div class="aura-container">
-       <header>
-    <div class="header-content">
-        <div class="logo">✨ Aura AI</div>
-        <p>Inteligência Multilíngue</p>
-    </div>
-    <button id="config-btn" class="settings-icon" title="Trocar API Key">
-        <i class="fas fa-cog"></i>
-    </button>
-</header>
+        <header>
+            <div class="header-info">
+                <h1>✨ Aura AI</h1>
+                <p>Inteligência Multilíngue</p>
+            </div>
+            <button id="config-btn" class="settings-btn" title="Trocar Chave">
+                <i class="fas fa-cog"></i>
+            </button>
+        </header>
 
         <div id="chat-box" class="chat-box">
-            <div class="message ai">Olá! Eu sou a <b>Aura</b>. Como posso ajudar você hoje? (I can speak many languages!)</div>
+            <div class="message ai">Olá! Eu sou a <b>Aura</b>. Como posso ajudar você hoje?</div>
         </div>
 
         <div class="input-container">
-            <input type="text" id="user-input" placeholder="Pergunte algo para a Aura..." autocomplete="off">
-            <button id="send-btn">
-                <i class="fas fa-paper-plane"></i>
-            </button>
-        </div>
-        
-        <div class="footer-info">
-            <small>Alimentado por Gemini API | Desenvolvido por Você</small>
+            <input type="text" id="user-input" placeholder="Pergunte algo...">
+            <button id="send-btn"><i class="fas fa-paper-plane"></i></button>
         </div>
     </div>
-
     <script src="script.js"></script>
 </body>
 </html>
