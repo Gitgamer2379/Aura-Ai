@@ -36,7 +36,8 @@ function appendMessage(role, text) {
 }
 
 async function fetchAuraResponse(prompt) {
-    const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
+    // Usando a versão 'v1' que é a oficial e estável
+    const API_URL = `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
     
     try {
         const response = await fetch(API_URL, {
@@ -45,9 +46,7 @@ async function fetchAuraResponse(prompt) {
             body: JSON.stringify({
                 contents: [{
                     parts: [{
-                        text: `Você é a Aura AI, uma assistente virtual avançada e poliglota. 
-                               Responda sempre de forma prestativa e no idioma do usuário. 
-                               Mensagem: ${prompt}`
+                        text: `Você é a Aura AI, uma assistente virtual avançada e poliglota. Responda à mensagem do usuário: ${prompt}`
                     }]
                 }]
             })
@@ -55,15 +54,17 @@ async function fetchAuraResponse(prompt) {
 
         const data = await response.json();
         
+        // Se houver erro na chave ou no modelo, o 'data.error' vai nos avisar
         if (data.error) {
-            if (data.error.status === "UNAUTHENTICATED") {
-                localStorage.removeItem('aura_api_key');
-                return "Erro: Sua Chave de API parece inválida. Clique em 'Alterar Chave' e cole a correta.";
-            }
-            return "Aura encontrou um erro: " + data.error.message;
+            console.error("Erro da API:", data.error);
+            return `Aura encontrou um erro: ${data.error.message}`;
         }
 
-        return data.candidates[0].content.parts[0].text;
+        if (data.candidates && data.candidates[0].content) {
+            return data.candidates[0].content.parts[0].text;
+        }
+        
+        return "Aura não conseguiu processar isso agora. Verifique sua chave!";
     } catch (error) {
         return "Erro de conexão. Verifique sua chave ou internet.";
     }
